@@ -4,13 +4,19 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: `
     <div class="app">
-        {{message}}
-        <!--some example of templating syntax-->
+      <!-- this is sugar syntax for... -->
+      <h1>
+        {{message.length ? message : 'Nothing here...'}}
+      </h1>
+      <!-- ...this -->
+      <h1 [innerText]="message"></h1>
+      <input [value]="message">
+        <!--some example of templating syntax
         {{message === 'Hello Bill'}}
         {{message === 'Hello World!'}}
         {{message.length }}
         {{message.length < 12 }}
-        {{message.length ? message : 'Nothing here...'}}
+        {{message}}-->
     </div> `,
   styles: [
     `
