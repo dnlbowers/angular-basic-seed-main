@@ -2,7 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: ` <div class="app">Hello Angular!</div> `,
+  template: `
+    <div class="app">
+        {{message}}
+        <!--some example of templating syntax-->
+        {{message === 'Hello Bill'}}
+        {{message === 'Hello World!'}}
+        {{message.length }}
+        {{message.length < 12 }}
+        {{message.length ? message : 'Nothing here...'}}
+    </div> `,
   styles: [
     `
       .app {
@@ -15,7 +24,13 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 export class AppComponent implements OnInit {
+  message!: string;
+  constructor() {
+    // instead of initialising here
+    // this.message = 'hello World!'
+  }
   ngOnInit() {
-    console.log('Hello World!');
+    // we do it here and adding ! to were the type is declared with message!: string;
+    this.message = 'Hello World!';
   }
 }
