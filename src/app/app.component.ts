@@ -4,19 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: `
     <div class="app">
-      <!-- this is sugar syntax for... -->
-      <h1>
-        {{message.length ? message : 'Nothing here...'}}
+      <h1 (click)="handleClick($event)">
+        {{ newMessage }}
       </h1>
-      <!-- ...this -->
-      <h1 [innerText]="message"></h1>
-      <input [value]="message">
-        <!--some example of templating syntax
-        {{message === 'Hello Bill'}}
-        {{message === 'Hello World!'}}
-        {{message.length }}
-        {{message.length < 12 }}
-        {{message}}-->
+      <input [value]="message" (input)="handleInput($event)">
     </div> `,
   styles: [
     `
@@ -31,12 +22,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   message!: string;
-  constructor() {
-    // instead of initialising here
-    // this.message = 'hello World!'
-  }
+  newMessage!: string;
   ngOnInit() {
-    // we do it here and adding ! to were the type is declared with message!: string;
     this.message = 'Hello World!';
+  }
+
+  handleClick(event: Event){
+    console.log(event);
+  }
+
+  handleInput(event: Event) {
+    const { value }= event.target as HTMLInputElement;
+    this.newMessage = value;
   }
 }
