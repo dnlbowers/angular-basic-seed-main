@@ -44,8 +44,6 @@ export class DonutListComponent implements OnInit {
       },
     ];
     this.donut = this.donuts[0];
-    // same as using the json pipe in the template
-    // this.donut = JSON.stringify(this.donuts[0]);
    }
 
 }
