@@ -4,6 +4,9 @@ import { Donut } from "../../models/donut.model";
 @Component({
   selector: 'app-donut-card',
   template: `
+  <div class="donut-card" 
+    [style.border]=" donut.promo ? '2px solid #eee' : 'none'"
+  >
     <img src="assets/img/{{ donut.icon }}.svg" [alt]="donut.name" class="donut-card-icon">
     <div>
       <p class="donut-card-name">
@@ -13,10 +16,11 @@ import { Donut } from "../../models/donut.model";
         {{ donut.price }}
       </p>
     </div>
+  </div>
   `,
   styles: [
     `
-    :host {
+    .donut-card {
       display: flex;
       align-items: center;
       background: #f7f7f7;
@@ -27,8 +31,6 @@ import { Donut } from "../../models/donut.model";
       &:hover {
           transform: translateY(-3px);
         }
-    }
-      .donut-card {
         &-name {
           font-size: 16px;
         }
@@ -40,7 +42,7 @@ import { Donut } from "../../models/donut.model";
           width:50px;
           margin-right: 10px;
         }
-      }
+    }
     `
   ]
 })
