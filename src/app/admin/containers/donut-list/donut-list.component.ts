@@ -10,7 +10,7 @@ import { Donut } from "../../models/donut.model";
       <app-donut-card [donut]="donuts[2]"></app-donut-card>
     </div>
   `,
-  styles: []
+  styles: [ ]
 })
 export class DonutListComponent implements OnInit {
 
