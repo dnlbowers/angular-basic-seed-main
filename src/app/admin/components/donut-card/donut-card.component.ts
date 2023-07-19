@@ -5,7 +5,9 @@ import { Donut } from "../../models/donut.model";
   selector: 'app-donut-card',
   template: `
   <div class="donut-card" 
-    [class.donut-card-promo]="donut.promo"
+    [ngClass]="{
+      'donut-card-promo': donut.promo
+    }"
   >
     <img src="assets/img/{{ donut.icon }}.svg" 
       [alt]="donut.name" 
