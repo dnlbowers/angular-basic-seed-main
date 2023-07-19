@@ -5,9 +5,7 @@ import { Donut } from "../../models/donut.model";
   selector: 'app-donut-card',
   template: `
   <div class="donut-card" 
-    [ngStyle]="{
-      border: donut.promo ? '2px solid #eee' : 'none'
-    }"
+    [class.donut-card-promo]="donut.promo"
   >
     <img src="assets/img/{{ donut.icon }}.svg" 
       [alt]="donut.name" 
@@ -35,6 +33,9 @@ import { Donut } from "../../models/donut.model";
       transition: transform 0.2s ease-in-out;
       &:hover {
           transform: translateY(-3px);
+        }
+        &-promo {
+          border: 2px solid #eee;
         }
         &-name {
           font-size: 16px;
