@@ -5,9 +5,14 @@ import { Donut } from "../../models/donut.model";
   selector: 'app-donut-card',
   template: `
   <div class="donut-card" 
-    [style.border]=" donut.promo ? '2px solid #eee' : 'none'"
+    [ngStyle]="{
+      border: donut.promo ? '2px solid #eee' : 'none'
+    }"
   >
-    <img src="assets/img/{{ donut.icon }}.svg" [alt]="donut.name" class="donut-card-icon">
+    <img src="assets/img/{{ donut.icon }}.svg" 
+      [alt]="donut.name" 
+      class="donut-card-icon"
+    />
     <div>
       <p class="donut-card-name">
         {{ donut.name }}
