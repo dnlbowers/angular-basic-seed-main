@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import { Donut } from "../../models/donut.model";
 
 @Component({
-  selector: 'app-donut-card',
+  selector: 'donut-card',
   template: `
   <div class="donut-card" 
     [ngClass]="{

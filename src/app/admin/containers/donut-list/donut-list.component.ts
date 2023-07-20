@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Donut } from "../../models/donut.model";
 
 @Component({
-  selector: 'app-donut-list',
+  selector: 'donut-list',
   template: `
     <div>
-      <ng-container *ngIf="donuts.length; then cards; else nothing"></ng-container>
-      <ng-template #cards>
-        <app-donut-card [donut]="donuts[0]"></app-donut-card>
-        <app-donut-card [donut]="donuts[1]"></app-donut-card>
-        <app-donut-card [donut]="donuts[2]"></app-donut-card>
-      </ng-template>
+      <ng-container *ngIf="donuts.length; else nothing">
+        <donut-card *ngFor="let donut of donuts" [donut]="donut"></donut-card>
+      </ng-container>
+
       <ng-template #nothing>
         <p>No Donuts here....</p>
       </ng-template>
