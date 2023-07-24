@@ -50,7 +50,7 @@ export class DonutListComponent implements OnInit {
     ];
   }
 
-  trackById(index: number, donut: Donut): string {
+  trackById(index: number, donut: Donut) {
     return donut.id;
   }
 }
