@@ -13,11 +13,16 @@ import {NgForm} from "@angular/forms";
                required
                minlength="5"
                ngModel
+               [ngModelOptions]="{ updateOn: 'blur' }"
                #name="ngModel"
         />
         <ng-container *ngIf="name.invalid && name.touched">
-          <div class="donut-form-error" *ngIf="name.errors?.minlength">Minimum length of your name must be 5 characters!</div>
-          <div class="donut-form-error" *ngIf="name.errors?.required">Name is required.</div>
+          <div class="donut-form-error" *ngIf="name.errors?.minlength">
+            Minimum length of your name must be 5 characters!
+          </div>
+          <div class="donut-form-error" *ngIf="name.errors?.required">
+            Name is required.
+          </div>
         </ng-container>
       </label>
 
@@ -85,6 +90,13 @@ import {NgForm} from "@angular/forms";
       <button type="submit" class="btn btn--green">
         Create
       </button>
+      <button type="button"
+              class="btn btn--grey"
+              (click)="form.resetForm()"
+      >
+        Reset Form
+      </button>
+      {{ form.submitted }}
 
       <pre>{{ form.value | json }}</pre>
     </form>
