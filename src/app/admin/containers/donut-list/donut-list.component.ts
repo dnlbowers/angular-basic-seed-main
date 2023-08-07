@@ -20,12 +20,10 @@ import {DonutService} from "../../services/donut.service";
 export class DonutListComponent implements OnInit {
 
   donuts!: Donut[];
-  constructor(private donutService: DonutService) {
-    //pass
-  }
+  constructor(private donutService: DonutService) { }
 
   ngOnInit(): void {
-    this.donuts = this.donutService.donuts;
+    this.donuts = this.donutService.read();
   }
 
   trackById(index: number, donut: Donut) {

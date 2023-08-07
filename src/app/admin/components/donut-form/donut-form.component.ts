@@ -5,7 +5,7 @@ import {Donut} from "../../models/donut.model";
 @Component({
   selector: 'donut-form',
   template: `
-    <form class="donut-form" (ngSubmit)="handleSubmit(form)" #form="ngForm">
+    <form class="donut-form" #form="ngForm">
       <label>
         <span>Name</span>
         <input type="text"
@@ -46,7 +46,7 @@ import {Donut} from "../../models/donut.model";
 
       <label>
         <span>Price</span>
-        <input type="number" name="price"class="input" required [ngModel]="donut.price" #price=ngModel >
+        <input type="number" name="price" class="input" required [ngModel]="donut.price" #price=ngModel >
         <ng-container *ngIf="price.invalid && price.touched">
           <div class="donut-form-error" *ngIf="price.errors?.required">Price is required.</div>
         </ng-container>
@@ -73,7 +73,6 @@ import {Donut} from "../../models/donut.model";
         <label>
           <input type="radio"
                  name="promo"
-                 required
                  value="limited"
                  [ngModel]="donut.promo"
           />
@@ -93,8 +92,16 @@ import {Donut} from "../../models/donut.model";
         </ng-container>
       </label>
 
-      <button type="submit" class="btn btn--green">
+      <button type="button" class="btn btn--green" (click)="handleCreate(form)">
         Create
+      </button>
+      <button 
+        type="button" 
+        class="btn btn--green" 
+        [disabled]="form.untouched" 
+        (click)="handleUpdate(form)"
+      >
+        Update
       </button>
       <button type="button"
               class="btn btn--grey"
@@ -105,9 +112,6 @@ import {Donut} from "../../models/donut.model";
       <div class="donut-form-working" *ngIf="form.valid && form.submitted">
         Working....
       </div>
-
-      <pre>{{ donut | json }}</pre>
-      <pre>{{ form.value | json }}</pre>
     </form>
   `,
   styles: [
@@ -145,6 +149,7 @@ export class DonutFormComponent {
 
   @Input() donut!: Donut;
   @Output() create = new EventEmitter<Donut>();
+  @Output() update = new EventEmitter<Donut>();
 
   icons: string[] = [
     'caramel-swirl',
@@ -156,9 +161,16 @@ export class DonutFormComponent {
     'zesty-lemon'
   ]
 
-  handleSubmit(form: NgForm) {
+  handleCreate(form: NgForm) {
     if (form.valid) {
       this.create.emit(form.value);
+    } else {
+      form.form.markAllAsTouched()
+    }
+  }
+  handleUpdate(form: NgForm) {
+    if (form.valid) {
+      this.update.emit( { id: this.donut.id, ...form.value });
     } else {
       form.form.markAllAsTouched()
     }
