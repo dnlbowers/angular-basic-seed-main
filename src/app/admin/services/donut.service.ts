@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { of, tap } from 'rxjs';
+import { map, of, tap } from 'rxjs';
 
 import {Donut} from "../models/donut.model";
 @Injectable({
@@ -22,19 +22,27 @@ export class DonutService {
         })
       );
   }
-  // readOne( id: string) {
-  //   const donut = this.read().find(
-  //     (donut: Donut )=> donut.id === id
-  //   ) 
-  //   if(donut) {
-  //     return donut;
-  //   }
-  //   return { name: '', icon: '', price: 0, description: '' };
-  // }
+ 
+  readOne( id: string) {
+    return this.read().pipe(
+      map((donuts) => {
+        const donut = donuts.find(
+          (donut: Donut )=> donut.id === id
+        ) 
+        if(donut) {
+          return donut;
+        }
+        return { name: '', icon: '', price: 0, description: '' };
+      }
+    ));
+  }
 
   create(payload: Donut) {
-    this.donuts = [...this.donuts, payload];
-    console.log(this.donuts);
+    return this.http.post<Donut>(`api/donuts`, payload).pipe(
+      tap((donut: Donut) => {
+        this.donuts = [...this.donuts, donut];
+      })
+    )
   }
 
   update(payload: Donut) {
