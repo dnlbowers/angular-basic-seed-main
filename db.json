@@ -37,14 +37,6 @@
       "icon": "zesty-lemon",
       "price": 129,
       "description": "Delicious lucious lemon"
-    },
-    {
-      "name": "NEW DONUT",
-      "icon": "strawberry-glaze",
-      "price": 229,
-      "promo": "limited",
-      "description": "Super expensive",
-      "id": "Y42KQwL"
     }
   ]
 }
