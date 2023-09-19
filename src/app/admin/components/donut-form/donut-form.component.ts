@@ -92,26 +92,29 @@ import {Donut} from "../../models/donut.model";
         </ng-container>
       </label>
 
-      <button type="button" class="btn btn--green" (click)="handleCreate(form)">
+      <button type="button" class="btn btn--green" *ngIf="!isEdit" (click)="handleCreate(form)">
         Create
       </button>
-      <button 
-        type="button" 
-        class="btn btn--green" 
-        [disabled]="form.untouched" 
+      <button
+        type="button"
+        class="btn btn--green"
+        *ngIf="isEdit"
+        [disabled]="form.untouched"
         (click)="handleUpdate(form)"
       >
         Update
       </button>
-      <button type="button" class="btn btn--green" (click)="handleDelete()">
+      <button type="button" class="btn btn--green" *ngIf="isEdit" (click)="handleDelete()">
         Delete
       </button>
       <button type="button"
               class="btn btn--grey"
+              *ngIf="form.touched || isEdit"
               (click)="form.resetForm()"
       >
         Reset Form
       </button>
+
       <div class="donut-form-working" *ngIf="form.valid && form.submitted">
         Working....
       </div>
@@ -154,6 +157,8 @@ import {Donut} from "../../models/donut.model";
 export class DonutFormComponent {
 
   @Input() donut!: Donut;
+  @Input() isEdit!:boolean;
+
   @Output() create = new EventEmitter<Donut>();
   @Output() update = new EventEmitter<Donut>();
   @Output() delete = new EventEmitter<Donut>();
@@ -187,7 +192,7 @@ export class DonutFormComponent {
     if (confirm(`Are you sure you want to delete ${this.donut.name}?`)) {
       this.delete.emit({ ...this.donut });
     }
-    
+
   }
 
 }

@@ -9,7 +9,7 @@ import {Donut} from "../models/donut.model";
 })
 export class DonutService {
   private donuts: Donut[] = [];
-  
+
   constructor(private http: HttpClient) { }
 
   read() {
@@ -22,13 +22,13 @@ export class DonutService {
         })
       );
   }
- 
-  readOne( id: string) {
+
+  readOne( id: string | null) {
     return this.read().pipe(
       map((donuts) => {
         const donut = donuts.find(
           (donut: Donut )=> donut.id === id
-        ) 
+        )
         if(donut) {
           return donut;
         }
