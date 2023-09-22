@@ -1,7 +1,12 @@
+import {CurrencyPipe, NgClass, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {Component, Input} from '@angular/core';
+import {RouterLink} from "@angular/router";
+
 import { Donut } from "../../models/donut.model";
 
 @Component({
+  standalone: true,
+  imports: [RouterLink, NgClass, NgSwitch, NgSwitchCase, NgSwitchDefault, CurrencyPipe],
   selector: 'donut-card',
   template: `
   <a class="donut-card"
@@ -17,7 +22,7 @@ import { Donut } from "../../models/donut.model";
     <div>
       <p class="donut-card-name">
         {{ donut.name }}
-        <ng-container [ngSwitch]="donut.promo"]>
+        <ng-container [ngSwitch]="donut.promo">
           <span *ngSwitchCase="'new'" class="donut-card-label">NEW</span>
           <span *ngSwitchCase="'limited'" class="donut-card-label">LIMITED</span>
           <span *ngSwitchDefault>

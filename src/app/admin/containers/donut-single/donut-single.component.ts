@@ -1,10 +1,13 @@
+import {ActivatedRoute, Router} from "@angular/router";
 import {Component, OnInit} from '@angular/core';
+
 import {Donut} from "../../models/donut.model";
 import {DonutService} from "../../services/donut.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
+import {DonutFormComponent} from "../../components/donut-form/donut-form.component";
 
 @Component({
+  standalone: true,
+  imports: [DonutFormComponent],
   selector: 'donut-single',
   template: `
     <div>
